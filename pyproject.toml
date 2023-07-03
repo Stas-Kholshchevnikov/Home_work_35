@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "home-work-33"
+version = "0.1.0"
+description = ""
+authors = ["Stas Kholshchevnikov <xcd85@mail.ru>"]
+readme = "README.md"
+packages = [{include = "home_work_33"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+envparse = "^0.2.0"
+psycopg2-binary = "^2.9.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
