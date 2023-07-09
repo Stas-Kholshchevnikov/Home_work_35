@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   db:
-    image: postgres:15.1-alpine
+    image: postgres:15.1
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -15,38 +15,27 @@ services:
       retries: 10
     volumes:
       - diplom_data:/var/lib/posgresql/data
-    ports:
-      - "5432:5432"
+
 
   migrations:
-    build: .
+    image: ${DOCKERHUB_USER}/diploma_15:latest
     env_file: .env
-    environment:
-      DB_HOST: db
     depends_on:
       db:
         condition: service_healthy
     command: python manage.py migrate
 
   api:
-    build: .
+    image: ${DOCKERHUB_USER}/diploma_15:latest
     env_file: .env
-    environment:
-      DB_HOST: db
-      DEBUG: bool(false)
     depends_on:
       db:
         condition: service_healthy
       migrations:
         condition: service_completed_successfully
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./core:/opt/app/core/
-      - ./Home_work_33:/opt/app/Home_work_33/
 
   collect_static:
-    build: .
+    image: ${DOCKERHUB_USER}/diploma_15:latest
     env_file: .env
     command: python manage.py collectstatic -c --no-input
     volumes:
@@ -64,7 +53,7 @@ services:
       collect_static:
         condition: service_completed_successfully
     volumes:
-      - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - django_static:/usr/share/nginx/html/static/
 
 volumes:

@@ -10,6 +10,7 @@ packages = [{include = "home_work_33"}]
 python = "^3.10"
 envparse = "^0.2.0"
 psycopg2-binary = "^2.9.6"
+django = "^4.2.3"
 
 
 [build-system]
