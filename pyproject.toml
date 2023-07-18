@@ -11,6 +11,8 @@ python = "^3.10"
 envparse = "^0.2.0"
 psycopg2-binary = "^2.9.6"
 django = "^4.2.3"
+djangorestframework = "^3.14.0"
+social-auth-app-django = "^5.2.0"
 
 
 [build-system]
