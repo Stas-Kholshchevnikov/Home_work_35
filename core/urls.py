@@ -1,6 +1,9 @@
 from django.urls import path
 
+from core.apps import CoreConfig
 from core.views import SignupView, LoginView, ProfileView, UpdatePasswordView
+
+app_name = CoreConfig
 
 urlpatterns = [
     path('signup', SignupView.as_view(), name='signup'),
