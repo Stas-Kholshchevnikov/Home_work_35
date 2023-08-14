@@ -4,8 +4,31 @@ from core.models import User
 from Home_work_33.models import BaseModel
 
 
+class Board(BaseModel):
+
+    title = models.CharField(max_length=255)
+    is_deleted = models.BooleanField(default=False)
+
+
+class BoardParticipant(BaseModel):
+    class Meta:
+        unique_together = ("board", "user")
+
+
+    class Role(models.IntegerChoices):
+        owner = 1, "Владелец"
+        writer = 2, "Редактор"
+        reader = 3, "Читатель"
+
+    board = models.ForeignKey(Board, on_delete=models.PROTECT, related_name="participants")
+    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="participants")
+    role = models.PositiveSmallIntegerField(choices=Role.choices, default=Role.owner)
+
+    editable_roles: list[tuple[int, str]] = Role.choices[1:]
+
 
 class GoalCategory(BaseModel):
+    board = models.ForeignKey(Board, on_delete=models.PROTECT, related_name='categories', null=True)
     title = models.CharField(verbose_name="Название", max_length=255)
     user = models.ForeignKey(User, verbose_name="Автор", on_delete=models.PROTECT)
     is_deleted = models.BooleanField(verbose_name="Удалена", default=False)
