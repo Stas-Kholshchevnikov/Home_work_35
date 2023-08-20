@@ -56,6 +56,14 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - django_static:/usr/share/nginx/html/static/
 
+  bot:
+    image: ${DOCKERHUB_USER}/diploma_15:latest
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    command: python manage.py runbot
+
 volumes:
   diplom_data:
   django_static:
