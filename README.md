@@ -14,9 +14,11 @@
 
 Полный функционал для моделей указан в ***Swagger*** 
 
-Для просмотра ***Swagger*** используйте адрес: ***localhost:port//api/docs/***
+Для просмотра ***Swagger*** используйте адрес: ***localhost:port/api/docs/***
 
 Дополнительно реализован телеграмм бот: ***diplom-15-deploy***
+
+Данные переменных окружения указаны в файле ***.env_exemple***
 
 # Стек
 ***Python, Django, DFR, Django ORM, PostgreSQL***
