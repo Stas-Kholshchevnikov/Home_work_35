@@ -60,8 +60,8 @@ services:
     image: ${DOCKERHUB_USER}/diploma_15:latest
     env_file: .env
     depends_on:
-      db:
-        condition: service_healthy
+      api:
+        condition: service_started
     command: python manage.py runbot
 
 volumes:

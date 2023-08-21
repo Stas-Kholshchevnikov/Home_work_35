@@ -18,7 +18,6 @@ class TestTgUser:
         """ Проверяем пользователя на аутентификацию через Телеграмм бота """
         tg_user = factories.TuserFactory.create(
             chat_id='847509830',
-            user_ud='847509830',
             username='Tester',
             user=user,
             verification_code='correct'
@@ -37,7 +36,6 @@ class TestTgUser:
         """ Проверка на валидности кода верификации """
         tg_user = factories.TuserFactory.create(
             chat_id='847509830',
-            user_ud='847509830',
             username='Tester',
             user=None,
             verification_code='correct'

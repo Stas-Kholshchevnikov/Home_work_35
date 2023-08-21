@@ -22,11 +22,11 @@ class GoalCommentListView(generics.ListAPIView):
     def get_queryset(self) -> QuerySet[GoalComment]:
         return GoalComment.objects.filter(goal__category__board__participants__user=self.request.user)
 
+
 class GoalCommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [GoalCommentPermission]
     serializer_class = GoalCommentWithUserSerializer
     queryset = GoalComment.objects.select_related('user')
-
 
     def get_queryset(self):
         return GoalComment.objects.select_related('user').filter(

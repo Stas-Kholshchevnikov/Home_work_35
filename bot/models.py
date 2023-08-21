@@ -7,8 +7,10 @@ from core.models import User
 # Create your models here.
 
 class TgUser(models.Model):
+    """ Модель пользователя ТГ-бота """
     chat_id = models.BigIntegerField(primary_key=True, editable=False, unique=True)
     username = models.CharField(max_length=255, null=True, blank=True)
+    user_ud = models.BigIntegerField(verbose_name="user ud", null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     verification_code = models.CharField(max_length=20, null=True, blank=True)
 

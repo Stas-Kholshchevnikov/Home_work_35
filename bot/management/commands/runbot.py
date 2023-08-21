@@ -14,11 +14,13 @@ cat_id = []
 logger.info(user_states)
 logger.info(cat_id)
 
+
 class Command(BaseCommand):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.tg_client = TgClient()
+
     def handle(self, *args, **options):
         offset = 0
         self.stdout.write(self.style.SUCCESS('Bot started'))
@@ -29,9 +31,7 @@ class Command(BaseCommand):
                 self.handle_message(item.message)
                 # self.tg_client.send_message(chat_id=item.message.chat.id, text=item.message.text)
 
-
     def handle_message(self, msg: Message):
-        # self.tg_client.send_message(chat_id=msg.chat.id, text=msg.text)
         tg_user, _ = TgUser.objects.get_or_create(chat_id=msg.chat.id, defaults={'username': msg.chat.username})
         if "/start" in msg.text:
             self.tg_client.send_message(
@@ -47,8 +47,6 @@ class Command(BaseCommand):
             self.handle_unauthorized_user(tg_user, msg)
 
     def handle_authorized_user(self, tg_user: TgUser, msg: Message):
-        #if msg.text.startswith('/'):
-        #self.tg_client.send_message(msg.chat.id, 'Gud Morning im sky_pd_bot!')
         """ Для работы с верифицированным пользователем.
                 Принимает и обрабатывает следующие команды:
                 :param: /goals -> выводит список целей
@@ -110,6 +108,7 @@ class Command(BaseCommand):
             cat_id.clear()
 
     def handle_unauthorized_user(self, tg_user: TgUser, msg: Message):
+        """ Проверочный код. Обрабатывать пользователя без проверки """
         self.tg_client.send_message(tg_user.chat_id, "Hello! Please authorized for begin use bot!")
         tg_user.update_verification_code()
         tg_user.save(update_fields=["verification_code"])

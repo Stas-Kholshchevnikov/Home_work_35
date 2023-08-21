@@ -41,6 +41,7 @@ class ProfileView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class UpdatePasswordView(generics.GenericAPIView):
+    """ Редактирование пароля """
     serializer_class = UpdatePasswordSerializers
     permission_classes = [permissions.IsAuthenticated]
 

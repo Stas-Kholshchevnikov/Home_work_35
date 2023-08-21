@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'goals',
     'core',
     'bot',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -155,6 +156,7 @@ AUTHENTICATION_BACKENDS = (
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 LOGGING = {
     "version": 1,
