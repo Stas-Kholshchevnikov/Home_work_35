@@ -59,6 +59,8 @@ services:
   bot:
     image: ${DOCKERHUB_USER}/diploma_15:latest
     env_file: .env
+    environment:
+      DB_HOST: db
     depends_on:
       api:
         condition: service_started
